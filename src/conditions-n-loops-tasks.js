@@ -118,8 +118,25 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let remainingNum = num;
+  const romanSymbols = [
+    { value: 10, symbol: 'X' },
+    { value: 9, symbol: 'IX' },
+    { value: 5, symbol: 'V' },
+    { value: 4, symbol: 'IV' },
+    { value: 1, symbol: 'I' },
+  ];
+
+  let result = '';
+  for (let i = 0; i < romanSymbols.length; i += 1) {
+    while (remainingNum >= romanSymbols[i].value) {
+      result += romanSymbols[i].symbol;
+      remainingNum -= romanSymbols[i].value;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -137,8 +154,56 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+
+    switch (char) {
+      case '-':
+        result += `${result ? ' ' : ''}minus`;
+        break;
+      case '.':
+      case ',':
+        result += `${result ? ' ' : ''}point`;
+        break;
+      case '0':
+        result += `${result ? ' ' : ''}zero`;
+        break;
+      case '1':
+        result += `${result ? ' ' : ''}one`;
+        break;
+      case '2':
+        result += `${result ? ' ' : ''}two`;
+        break;
+      case '3':
+        result += `${result ? ' ' : ''}three`;
+        break;
+      case '4':
+        result += `${result ? ' ' : ''}four`;
+        break;
+      case '5':
+        result += `${result ? ' ' : ''}five`;
+        break;
+      case '6':
+        result += `${result ? ' ' : ''}six`;
+        break;
+      case '7':
+        result += `${result ? ' ' : ''}seven`;
+        break;
+      case '8':
+        result += `${result ? ' ' : ''}eight`;
+        break;
+      case '9':
+        result += `${result ? ' ' : ''}nine`;
+        break;
+      default:
+        throw new Error(`Unknown character: ${char}`);
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -153,8 +218,11 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] !== str[str.length - i - 1]) return false;
+  }
+  return true;
 }
 
 /**
