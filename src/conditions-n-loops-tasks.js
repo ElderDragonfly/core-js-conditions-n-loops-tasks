@@ -284,16 +284,18 @@ function isContainNumber(num, digit) {
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
 function getBalanceIndex(arr) {
+  let totalSum = 0;
+  let leftSum = 0;
   for (let i = 0; i < arr.length; i += 1) {
-    let sum1 = 0;
-    let sum2 = 0;
-    for (let j = 0; j < i; j += 1) {
-      sum1 += arr[j];
+    totalSum += arr[i];
+  }
+  for (let i = 0; i < arr.length; i += 1) {
+    totalSum -= arr[i];
+
+    if (leftSum === totalSum) {
+      return i;
     }
-    for (let k = i + 1; k < arr.length; k += 1) {
-      sum2 += arr[k];
-    }
-    if (sum1 === sum2) return i;
+    leftSum += arr[i];
   }
   return -1;
 }
@@ -419,8 +421,22 @@ function sortByAsc(/* arr */) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
-function shuffleChar(/* str, iterations */) {
-  throw new Error('Not implemented');
+function shuffleChar(str, iterations) {
+  let shuffled = str;
+  for (let i = 0; i < iterations; i += 1) {
+    let evenChars = '';
+    let oddChars = '';
+
+    for (let j = 0; j < shuffled.length; j += 1) {
+      if (j % 2 === 0) {
+        evenChars += shuffled[j];
+      } else {
+        oddChars += shuffled[j];
+      }
+    }
+    shuffled = evenChars + oddChars;
+  }
+  return shuffled;
 }
 
 /**
